@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多项式回归,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0.5～0.5之间的一个随机值得到的结果12345678910%matplotlib inlineimport numpy as npimport tensorflow as tfimport matplotlib.pyplot as pltplt.rcParams[&quot;figure.figsize&quot;] = (14,">
+<meta name="keywords" content="多项式回归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习入门笔记（一）-多项式回归">
+<meta property="og:url" content="https://super-storm.github.io/2019/03/08/机器学习入门笔记（一）-多项式回归/index.html">
+<meta property="og:site_name" content="Storm">
+<meta property="og:description" content="一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0.5～0.5之间的一个随机值得到的结果12345678910%matplotlib inlineimport numpy as npimport tensorflow as tfimport matplotlib.pyplot as pltplt.rcParams[&quot;figure.figsize&quot;] = (14,">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://super-storm.github.io/2019/03/08/机器学习入门笔记（一）-多项式回归/output_1_1.png">
+<meta property="og:image" content="https://super-storm.github.io/2019/03/08/机器学习入门笔记（一）-多项式回归/output_13_0.png">
+<meta property="og:updated_time" content="2019-04-04T13:29:49.347Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习入门笔记（一）-多项式回归">
+<meta name="twitter:description" content="一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0.5～0.5之间的一个随机值得到的结果12345678910%matplotlib inlineimport numpy as npimport tensorflow as tfimport matplotlib.pyplot as pltplt.rcParams[&quot;figure.figsize&quot;] = (14,">
+<meta name="twitter:image" content="https://super-storm.github.io/2019/03/08/机器学习入门笔记（一）-多项式回归/output_1_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://super-storm.github.io/2019/03/08/机器学习入门笔记（一）-多项式回归/">
+
+
+
+
+
+  <title>机器学习入门笔记（一）-多项式回归 | Storm</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Storm</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">superStorm</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://super-storm.github.io/2019/03/08/机器学习入门笔记（一）-多项式回归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fengxi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/bg.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Storm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习入门笔记（一）-多项式回归</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-08T18:34:48+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/08/机器学习入门笔记（一）-多项式回归/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/08/机器学习入门笔记（一）-多项式回归/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  693
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0-5～0-5之间的一个随机值得到的结果"><a href="#一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0-5～0-5之间的一个随机值得到的结果" class="headerlink" title="一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0.5～0.5之间的一个随机值得到的结果"></a>一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0.5～0.5之间的一个随机值得到的结果</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rcParams[<span class="string">"figure.figsize"</span>] = (<span class="number">14</span>,<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">n_insp = <span class="number">100</span></span><br><span class="line">x_set = np.linspace(<span class="number">-3</span>, <span class="number">3</span>, n_insp)</span><br><span class="line">y_set = np.sin(x_set) + np.random.uniform(<span class="number">-0.5</span>, <span class="number">0.5</span>, n_insp)</span><br><span class="line">plt.scatter(x_set, y_set)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x7f4022ac3390&gt;
+</code></pre><p><img src="output_1_1.png" alt="png"></p>
+<h3 id="二、定义参数输入参数的占位符"><a href="#二、定义参数输入参数的占位符" class="headerlink" title="二、定义参数输入参数的占位符"></a>二、定义参数输入参数的占位符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = tf.placeholder(tf.float32, name = <span class="string">"X"</span>)</span><br><span class="line">Y = tf.placeholder(tf.float32, name= <span class="string">"Y"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="三、定义运算图，假定特征有x-x-2-x-3-三项，则整个函数的计算为-y-wx-W1x-2-w2-x-3-b"><a href="#三、定义运算图，假定特征有x-x-2-x-3-三项，则整个函数的计算为-y-wx-W1x-2-w2-x-3-b" class="headerlink" title="三、定义运算图，假定特征有x,x^2,x^3,三项，则整个函数的计算为 y=wx + W1x^2  + w2*x^3 + b"></a>三、定义运算图，假定特征有x,x^2,x^3,三项，则整个函数的计算为 y=w<em>x + W1</em>x^2  + w2*x^3 + b</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">w = tf.Variable(tf.random_normal([<span class="number">1</span>]), name = <span class="string">"weight"</span>)</span><br><span class="line">w1= tf.Variable(tf.random_normal([<span class="number">1</span>]), name = <span class="string">"weight_1"</span>)</span><br><span class="line">w2 = tf.Variable(tf.random_normal([<span class="number">1</span>]), name = <span class="string">"weight_2"</span>)</span><br><span class="line">b = tf.Variable(tf.random_normal([<span class="number">1</span>]), name= <span class="string">"bias"</span>)</span><br><span class="line">Y_predict = tf.add(tf.multiply(X, w), tf.multiply(w1, tf.pow(X,<span class="number">2</span>)))</span><br><span class="line">Y_predict = tf.add(Y_predict, tf.multiply(w2, tf.pow(X,<span class="number">3</span>)))</span><br><span class="line">Y_predict = tf.add(Y_predict, b)</span><br></pre></td></tr></table></figure>
+<h3 id="四、定义损失函数和初始化optimizer-这里损失函数是计算y与预测值的方差均值"><a href="#四、定义损失函数和初始化optimizer-这里损失函数是计算y与预测值的方差均值" class="headerlink" title="四、定义损失函数和初始化optimizer,这里损失函数是计算y与预测值的方差均值"></a>四、定义损失函数和初始化optimizer,这里损失函数是计算y与预测值的方差均值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x_set.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(100,)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">loss = tf.reduce_sum(tf.pow(Y_predict - Y, <span class="number">2</span>)) / x_set.shape[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 定义学习率为 0.01</span></span><br><span class="line">learning_rate = <span class="number">0.01</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)</span><br></pre></td></tr></table></figure>
+<h3 id="五、训练迭代"><a href="#五、训练迭代" class="headerlink" title="五、训练迭代"></a>五、训练迭代</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># 初始化所有变量</span></span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义tensorboard的log保存路径</span></span><br><span class="line">    writer = tf.summary.FileWriter(<span class="string">"./graphs/polynomial_regulation"</span>, sess.graph)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">        <span class="comment"># 每一对数据进行一次迭代，遍历完数据集为一轮，共训练1000轮</span></span><br><span class="line">        sum_loss = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(x_set, y_set):</span><br><span class="line">            _, l = sess.run([optimizer, loss],feed_dict = &#123;X:x,Y:y&#125;)</span><br><span class="line">            sum_loss += l</span><br><span class="line">        <span class="keyword">if</span> i%<span class="number">20</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># 每二十轮打印一次当前准确率</span></span><br><span class="line">            print(<span class="string">'Epoch &#123;0&#125;: &#123;1&#125;'</span>.format(i, sum_loss/x_set.shape[<span class="number">0</span>]))</span><br><span class="line">    writer.close()</span><br><span class="line">    <span class="comment"># 取出最后的权重和偏移值</span></span><br><span class="line">    w, w1, w2, b = sess.run([w,w1,w2,b])</span><br></pre></td></tr></table></figure>
+<pre><code>Epoch 0: 0.011287849849201415
+Epoch 20: 0.002904312098070534
+Epoch 40: 0.0022930659861960124
+Epoch 60: 0.001861640907111166
+Epoch 80: 0.0015570845219596663
+Epoch 100: 0.0013421906849065124
+Epoch 120: 0.0011906639028636335
+Epoch 140: 0.0010839080285924751
+Epoch 160: 0.0010087724971023703
+Epoch 180: 0.0009559617677211918
+Epoch 200: 0.0009189029343284005
+Epoch 220: 0.0008929493658629184
+Epoch 240: 0.0008748186269485813
+Epoch 260: 0.0008621914480389414
+Epoch 280: 0.0008534308153672754
+Epoch 300: 0.0008473811643942852
+Epoch 320: 0.0008432286334247863
+Epoch 340: 0.0008403999191202516
+Epoch 360: 0.0008384917434211502
+Epoch 380: 0.0008372206560037965
+Epoch 400: 0.00083638845353045
+Epoch 420: 0.0008358570021426814
+Epoch 440: 0.000835529392748171
+Epoch 460: 0.0008353382271738141
+Epoch 480: 0.0008352376613193435
+Epoch 500: 0.0008351957923265729
+Epoch 520: 0.0008351906345031778
+Epoch 540: 0.0008352075220511918
+Epoch 560: 0.0008352370859906216
+Epoch 580: 0.0008352726358773677
+Epoch 600: 0.0008353100529581625
+Epoch 620: 0.0008353470957054076
+Epoch 640: 0.0008353820821457792
+Epoch 660: 0.0008354142016842925
+Epoch 680: 0.0008354429479974713
+Epoch 700: 0.0008354686113952425
+Epoch 720: 0.0008354910716359676
+Epoch 740: 0.000835510656680416
+Epoch 760: 0.0008355276462786598
+Epoch 780: 0.0008355419888481741
+Epoch 800: 0.000835554459651977
+Epoch 820: 0.0008355653869491241
+Epoch 840: 0.0008355743816347427
+Epoch 860: 0.0008355819873166936
+Epoch 880: 0.0008355887906360771
+Epoch 900: 0.000835594305444296
+Epoch 920: 0.0008355990350996834
+Epoch 940: 0.0008356031159648758
+Epoch 960: 0.0008356063359790334
+Epoch 980: 0.0008356092827835581
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"w:"</span>+str(w[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">"w1:"</span>+str(w1[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">"w2:"</span>+str(w2[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">"b:"</span>+str(b[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code>w:0.84994864
+w1:0.018252745
+w2:-0.09445592
+b:-0.07383199
+</code></pre><h3 id="六、结果展示"><a href="#六、结果展示" class="headerlink" title="六、结果展示"></a>六、结果展示</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x_set, y_set, <span class="string">'bo'</span>, label=<span class="string">'Real data'</span>)</span><br><span class="line">plt.plot(x_set, x_set*w+ np.power(x_set,<span class="number">2</span>)*w1 + np.power(x_set,<span class="number">3</span>)*w2 + b, <span class="string">'r'</span>, label=<span class="string">'Predicted data'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_13_0.png" alt="png"></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+
+</div>
+
+    
+    </div>
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/03/08/机器学习入门笔记（一）-多项式回归/">机器学习入门笔记（一）-多项式回归</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 fengxi 的个人博客">fengxi</a></p>
+  <p><span>发布时间:</span>2019年03月08日 - 18:03</p>
+  <p><span>最后更新:</span>2019年04月04日 - 21:04</p>
+  <p><span>原始链接:</span><a href="/2019/03/08/机器学习入门笔记（一）-多项式回归/" title="机器学习入门笔记（一）-多项式回归">https://super-storm.github.io/2019/03/08/机器学习入门笔记（一）-多项式回归/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://super-storm.github.io/2019/03/08/机器学习入门笔记（一）-多项式回归/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({
+          title: "",
+          text: '复制成功',
+          icon: "success",
+          showConfirmButton: true
+          });
+    });
+    });
+</script>
+
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多项式回归/" rel="tag"><i class="fa fa-tag"></i> 多项式回归</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/06/spring-boot-学习笔记（三）-过滤器/" rel="next" title="spring-boot-学习笔记（三）-过滤器">
+                <i class="fa fa-chevron-left"></i> spring-boot-学习笔记（三）-过滤器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/12/机器学习入门笔记（二）-KMeans/" rel="prev" title="机器学习入门笔记（二）-KMeans">
+                机器学习入门笔记（二）-KMeans <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/bg.png" alt="fengxi">
+            
+              <p class="site-author-name" itemprop="name">fengxi</p>
+              <p class="site-description motion-element" itemprop="description">宴安鸩毒 不可怀也</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Super-Storm" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://wangfan.me" title="wangfan" target="_blank">wangfan</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://asenzdl.github.io/" title="森哥的博客" target="_blank">森哥的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0-5～0-5之间的一个随机值得到的结果"><span class="nav-number">1.</span> <span class="nav-text">一、生成数据，生成100个点，x是从-3到3之间均匀分布的，y是x的正弦函数值加上-0.5～0.5之间的一个随机值得到的结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、定义参数输入参数的占位符"><span class="nav-number">2.</span> <span class="nav-text">二、定义参数输入参数的占位符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、定义运算图，假定特征有x-x-2-x-3-三项，则整个函数的计算为-y-wx-W1x-2-w2-x-3-b"><span class="nav-number">3.</span> <span class="nav-text">三、定义运算图，假定特征有x,x^2,x^3,三项，则整个函数的计算为 y=wx + W1x^2  + w2*x^3 + b</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、定义损失函数和初始化optimizer-这里损失函数是计算y与预测值的方差均值"><span class="nav-number">4.</span> <span class="nav-text">四、定义损失函数和初始化optimizer,这里损失函数是计算y与预测值的方差均值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、训练迭代"><span class="nav-number">5.</span> <span class="nav-text">五、训练迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、结果展示"><span class="nav-number">6.</span> <span class="nav-text">六、结果展示</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fengxi</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">22.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+  </span>
+  </div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共22.8k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '3wr0xjmsndYlDACTI4jhrYam-gzGzoHsz',
+        appKey: '5wVnBJRtaMAK2COwUMxONCd4',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":60,"height":120,"hOffset":-10,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.85,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
