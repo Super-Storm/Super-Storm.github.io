@@ -8,8 +8,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>tensorflow</tag>
         <tag>CNN</tag>
+        <tag>tensorflow</tag>
       </tags>
   </entry>
   <entry>
@@ -31,8 +31,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>KNN</tag>
         <tag>tensorflow</tag>
+        <tag>KNN</tag>
       </tags>
   </entry>
   <entry>
