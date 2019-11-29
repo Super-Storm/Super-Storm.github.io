@@ -318,6 +318,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://super-storm.github.io/2019/11/29/手动卸载Trend-Micro-Security-for-Mac-TMSM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fengxi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/bg.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Storm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/29/手动卸载Trend-Micro-Security-for-Mac-TMSM/" itemprop="url">手动卸载Trend Micro Security for Mac (TMSM)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-29T17:34:30+08:00">
+                2019-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mac/" itemprop="url" rel="index">
+                    <span itemprop="name">mac</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/29/手动卸载Trend-Micro-Security-for-Mac-TMSM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/29/手动卸载Trend-Micro-Security-for-Mac-TMSM/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  379
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>&emsp;&emsp;mac不小心安装上了Trend Micro Security for Mac (TMSM)，这个流氓软件关都挂不掉，电脑还经常在键盘唤醒时卡死，没理由不删掉他，再经历各种搜索后我终于成功了，在此记录一下：<br>主要方式为命令行强制删除该软件相关文件，这个方法参考了一篇文章：<a href="https://ephrain.net/mac-%E6%89%8B%E5%8B%95%E7%A7%BB%E9%99%A4-trend-micro-security-for-mac-tmsm-%E4%B8%AD%E6%8E%A7%E7%89%88%E6%9C%AC/" target="_blank" rel="noopener">https://ephrain.net/mac-%E6%89%8B%E5%8B%95%E7%A7%BB%E9%99%A4-trend-micro-security-for-mac-tmsm-%E4%B8%AD%E6%8E%A7%E7%89%88%E6%9C%AC/</a><br>如该文章描述，如果直接删除相关目录会报错，因为该程序一直在后台跑着：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(base) fengxideMacBook-Pro:LaunchDaemons fengxi$ rm -rf /Library/Application\ Support/TrendMicro/</span><br><span class="line">rm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/_CodeSignature/CodeResources: Permission denied</span><br><span class="line">rm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/_CodeSignature: Permission denied</span><br><span class="line">rm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/MacOS/TMDebugManager: Permission denied</span><br><span class="line">rm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/MacOS: Permission denied</span><br><span class="line">rm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/Resources/de.lproj/DebugMgr.strings: Permission denied</span><br><span class="line">rm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/Resources/de.lproj/TMCCDebugMgrMain.nib: Permission denied</span><br><span class="line">rm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/Resources/de.lproj/InfoPlist.strings: Permission denied</span><br></pre></td></tr></table></figure></p>
+<p>但是我在执行杀掉进程时一直提示：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Operation not permitted</span><br></pre></td></tr></table></figure><br>最后在各种谷歌后用了以下方式解决</p>
+<p>首先进入root 用户<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure><br>然后执行命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base) fengxideMacBook-Pro:LaunchDaemons fengxi$ sudo su</span><br><span class="line">sh-3.2# sudo ps -ef | egrep -i trend | egrep -v grep |cut -c 7-12|xargs kill -9</span><br><span class="line">sh-3.2# rm com.trendmicro.tmsm.launcher.plist</span><br><span class="line">sh-3.2# rm -rf /Library/Application\ Support/TrendMicro/</span><br><span class="line">sh-3.2# rm -rf /Library/Frameworks/iCoreClientPb.framework/</span><br></pre></td></tr></table></figure><br>在这样操作后，TMSM已经被删光光了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://super-storm.github.io/2019/04/10/二叉树的python实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2048,207 +2240,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://super-storm.github.io/2019/02/14/kotlin学习（五）-高阶函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fengxi">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/bg.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Storm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/14/kotlin学习（五）-高阶函数/" itemprop="url">kotlin学习（五）-高阶函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T11:56:07+08:00">
-                2019-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kotlin/" itemprop="url" rel="index">
-                    <span itemprop="name">kotlin</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/14/kotlin学习（五）-高阶函数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/14/kotlin学习（五）-高阶函数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  254
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>&emsp;&emsp;kotlin的高阶函数是指将函数作为参数或返回值的函数</p>
-<ul>
-<li><p>将函数作为参数的高阶函数<br>看一下sumBy{}源码：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/02/14/kotlin学习（五）-高阶函数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2296,7 +2292,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2307,7 +2303,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2318,7 +2314,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2398,7 +2394,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">22.9k</span>
+    <span title="Site words total count">23.3k</span>
   
 </div>
 
@@ -2414,7 +2410,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共22.9k字</span>
+  <span class="post-count">博客全站共23.3k字</span>
 </div>
 
         
