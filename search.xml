@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[git剪切commit记录]]></title>
+    <url>%2F2020%2F02%2F26%2Fgit%E5%89%AA%E5%88%87commit%E8%AE%B0%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[每次用git解决一个问题，都会发现一片新天地，记录一下场景：A分支：11-&gt;2-&gt;3-&gt;4B分支：15-&gt;6-&gt;7-&gt;8 目的：想把A分支的commit 2和3 合并到B分支上来,也就是5-&gt;6-&gt;7-&gt;8-&gt;2-&gt;3的效果方法：在B分支上执行12345git checkout -b "tmp_C" 3git checkout tmp_Cgit rebase --onto B 2^git checkout Bgit merge tmp_C这样在B上就有了2、3，]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[手动卸载Trend Micro Security for Mac (TMSM)]]></title>
     <url>%2F2019%2F11%2F29%2F%E6%89%8B%E5%8A%A8%E5%8D%B8%E8%BD%BDTrend-Micro-Security-for-Mac-TMSM%2F</url>
     <content type="text"><![CDATA[&emsp;&emsp;mac不小心安装上了Trend Micro Security for Mac (TMSM)，这个流氓软件关都挂不掉，电脑还经常在键盘唤醒时卡死，没理由不删掉他，再经历各种搜索后我终于成功了，在此记录一下：主要方式为命令行强制删除该软件相关文件，这个方法参考了一篇文章：https://ephrain.net/mac-%E6%89%8B%E5%8B%95%E7%A7%BB%E9%99%A4-trend-micro-security-for-mac-tmsm-%E4%B8%AD%E6%8E%A7%E7%89%88%E6%9C%AC/如该文章描述，如果直接删除相关目录会报错，因为该程序一直在后台跑着：12345678(base) fengxideMacBook-Pro:LaunchDaemons fengxi$ rm -rf /Library/Application\ Support/TrendMicro/rm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/_CodeSignature/CodeResources: Permission deniedrm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/_CodeSignature: Permission deniedrm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/MacOS/TMDebugManager: Permission deniedrm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/MacOS: Permission deniedrm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/Resources/de.lproj/DebugMgr.strings: Permission deniedrm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/Resources/de.lproj/TMCCDebugMgrMain.nib: Permission deniedrm: /Library/Application Support/TrendMicro//Tools/TMDebugManager.app/Contents/Resources/de.lproj/InfoPlist.strings: Permission denied 但是我在执行杀掉进程时一直提示：1Operation not permitted最后在各种谷歌后用了以下方式解决 首先进入root 用户1sudo su然后执行命令：12345(base) fengxideMacBook-Pro:LaunchDaemons fengxi$ sudo sush-3.2# sudo ps -ef | egrep -i trend | egrep -v grep |cut -c 7-12|xargs kill -9sh-3.2# rm com.trendmicro.tmsm.launcher.plistsh-3.2# rm -rf /Library/Application\ Support/TrendMicro/sh-3.2# rm -rf /Library/Frameworks/iCoreClientPb.framework/在这样操作后，TMSM已经被删光光了]]></content>
